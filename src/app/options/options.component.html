@@ -1,0 +1,31 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <label>Elija una opción*</label>
+    <button *ngFor= "let option of options" (click)="selectRover(option);" [ngClass]="form.value.roverSelected === option ? 'bg-blue': ''">{{option}}</button>     
+    
+    <label>Cámara:</label>
+    <select name="cameraSelected" formControlName="cameraSelected">
+        <option *ngFor="let camera of cameras" [value]="camera.abbreviation" >
+            {{camera.name}}
+        </option>
+    </select>
+
+    <input type="date" 
+    id="start"
+    name="date-filter" 
+    [value]="dt | date:'yyyy-MM-dd'"
+    formControlName="dateFilter"
+    >
+
+    <label for="sol-date">Sol Date:</label>
+        <input type="text" name="sol-date"
+            formControlName="solDate"
+        >
+
+
+
+    <button type="submit" class="btn-search">Buscar</button>
+</form>
+
+    
+<div *ngIf="error">{{error}}</div>
